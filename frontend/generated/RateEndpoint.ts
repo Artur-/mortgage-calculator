@@ -7,7 +7,15 @@
 
 // @ts-ignore
 import client from './connect-client.default';
+import Options from './com/example/app/endpoint/Options';
 import Rate from './com/example/app/endpoint/Rate';
+
+export function apply(
+  name: string,
+  options: Options
+): Promise<boolean> {
+  return client.call('RateEndpoint', 'apply', {name, options}, {requireCredentials: false});
+}
 
 export function getRates(): Promise<Array<Rate>> {
   return client.call('RateEndpoint', 'getRates', undefined, {requireCredentials: false});

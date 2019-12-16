@@ -3,6 +3,8 @@ package com.example.app.endpoint;
 import com.vaadin.flow.server.connect.VaadinService;
 import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
 
+import org.slf4j.LoggerFactory;
+
 @VaadinService
 @AnonymousAllowed
 public class RateEndpoint {
@@ -14,6 +16,13 @@ public class RateEndpoint {
 
     public Rate[] getRates() {
         return rates;
+    }
+
+    public boolean apply(String name, Options options) {
+        LoggerFactory.getLogger(getClass()).info("{} applied for a loan: {}", name, options);
+
+        // We don't want to deal with the small fish
+        return (options.getAmount() > 500000);
     }
 
 }

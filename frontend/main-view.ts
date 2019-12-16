@@ -9,14 +9,13 @@ import "@vaadin/vaadin-ordered-layout";
 
 import * as RateEndpoint from "./generated/RateEndpoint";
 
-import { formatCurrency } from "./util";
+import {
+  formatCurrency,
+  showNotification,
+  showErrorNotification
+} from "./util";
 import Rate from "./generated/com/example/app/endpoint/Rate";
-
-interface Options {
-  amount: number;
-  paybackTimeMonths: number;
-  rate: Rate;
-}
+import Options from "./generated/com/example/app/endpoint/Options";
 
 @customElement("main-view")
 export class MainView extends LitElement {
@@ -110,7 +109,7 @@ export class MainView extends LitElement {
 
       <div>Monthly payment</div>
       <p>${formatCurrency(this.monthlyPayment)} / month</p>
-      <vaadin-button>Apply!</vaadin-button>
+      <vaadin-button @click="${() => this.apply()}">Apply!</vaadin-button>
     `;
   }
   amountChanged(value: number) {
@@ -129,5 +128,14 @@ export class MainView extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
     this.rates = await RateEndpoint.getRates();
+  }
+
+  async apply() {
+    const approved = await RateEndpoint.apply("John Doe", this.selectedOptions);
+    if (approved) {
+      showNotification("Your application was approved!\nGo buy that house");
+    } else {
+      showErrorNotification("Sorry, your application was denied");
+    }
   }
 }
