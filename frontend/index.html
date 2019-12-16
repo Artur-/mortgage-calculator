@@ -3,8 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <title>Mortgage Calculator</title>
     <style></style>
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("sw.js");
+        });
+      }
+    </script>
     <!-- index.ts is included here automatically (either by the dev server or during the build) -->
   </head>
   <body>
