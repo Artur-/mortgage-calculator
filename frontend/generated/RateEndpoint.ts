@@ -9,11 +9,12 @@
 import client from './connect-client.default';
 import Options from './com/example/app/endpoint/Options';
 import Rate from './com/example/app/endpoint/Rate';
+import Result from './com/example/app/endpoint/Result';
 
 export function apply(
   name: string,
   options: Options
-): Promise<boolean> {
+): Promise<Result> {
   return client.call('RateEndpoint', 'apply', {name, options}, {requireCredentials: false});
 }
 

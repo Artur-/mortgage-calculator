@@ -133,11 +133,13 @@ export class MainView extends LitElement {
   }
 
   async apply() {
-    const approved = await RateEndpoint.apply("John Doe", this.selectedOptions);
-    if (approved) {
-      showNotification("Your application was approved!\nGo buy that house");
+    const result = await RateEndpoint.apply("John Doe", this.selectedOptions);
+    if (result.approved) {
+      showNotification("Your application was approved!\n" + result.message);
     } else {
-      showErrorNotification("Sorry, your application was denied");
+      showErrorNotification(
+        "Sorry, your application was denied.\n" + result.message
+      );
     }
   }
 }

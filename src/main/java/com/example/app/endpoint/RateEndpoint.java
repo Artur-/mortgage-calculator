@@ -18,11 +18,14 @@ public class RateEndpoint {
         return rates;
     }
 
-    public boolean apply(String name, Options options) {
+    public Result apply(String name, Options options) {
         LoggerFactory.getLogger(getClass()).info("{} applied for a loan: {}", name, options);
 
-        // We don't want to deal with the small fish
-        return (options.getAmount() > 500000);
+        if (options.getAmount() < 500000) {
+            return Result.deny("We do not deal with small fish");
+        } else {
+            return Result.approve("Thank you, we will send you the cash today");
+        }
     }
 
 }
