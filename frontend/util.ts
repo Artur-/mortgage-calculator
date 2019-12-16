@@ -1,14 +1,20 @@
-import '@vaadin/vaadin-notification'
+import "@vaadin/vaadin-notification";
 
 const formatter = new Intl.NumberFormat("en", {
   style: "currency",
   currency: "EUR"
 });
+const pctFormatter = new Intl.NumberFormat("en", {
+  style: "percent",
+  minimumFractionDigits: 2
+});
 
 const formatCurrency = (amount: number) => {
   return formatter.format(amount);
 };
-
+const formatPct = (amount: number) => {
+  return pctFormatter.format(amount/100);
+};
 const showNotification = (text: string) => {
   const n = _showNotification(text);
   n.position = "middle";
@@ -39,4 +45,4 @@ const _showNotification = (text: string) => {
   return n;
 };
 
-export { formatCurrency, showNotification, showErrorNotification };
+export { formatCurrency, formatPct, showNotification, showErrorNotification };

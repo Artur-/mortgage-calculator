@@ -11,6 +11,7 @@ import * as RateEndpoint from "./generated/RateEndpoint";
 
 import {
   formatCurrency,
+  formatPct,
   showNotification,
   showErrorNotification
 } from "./util";
@@ -101,7 +102,8 @@ export class MainView extends LitElement {
           rate => rate.name,
           rate => html`
             <vaadin-radio-button .value=${rate} ?checked=${rate.defaultRate}
-              >${rate.name}</vaadin-radio-button
+              >${rate.name}
+              (${formatPct(rate.rate + rate.margin)})</vaadin-radio-button
             >
           `
         )}
