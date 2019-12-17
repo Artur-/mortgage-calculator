@@ -1,5 +1,6 @@
 import { Router } from "@vaadin/router";
 import "./main-view";
+import 'github-corner'
 
 const routes = [
   {

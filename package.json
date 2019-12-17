@@ -8,6 +8,7 @@
     "@vaadin/flow-frontend": "./target/flow-frontend",
     "@vaadin/router": "^1.4.1",
     "@webcomponents/webcomponentsjs": "^2.2.10",
+    "github-corner": "^2.0.3",
     "lit-element": "^2.2.1"
   },
   "devDependencies": {
@@ -25,5 +26,5 @@
     "webpack-merge": "4.2.1",
     "workbox-webpack-plugin": "^4.3.1"
   },
-  "vaadinAppPackageHash": "218668411840a88fd03e0900713dec908b2d4d3b552ad276d654adb6478259bf"
+  "vaadinAppPackageHash": "998e5cbe4b84af7bb9f0fcef26c88ee41ccdf3163456a0699a7d7f36c6072e0a"
 }
