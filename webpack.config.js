@@ -48,10 +48,6 @@ module.exports = merge(
           {
             urlPattern: "/",
             handler: "NetworkFirst"
-          },
-          {
-            urlPattern: "/mortgage-calculator/",
-            handler: "NetworkFirst"
           }
         ]
       })
