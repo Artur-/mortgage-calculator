@@ -14,21 +14,6 @@ const { GenerateSW } = require("workbox-webpack-plugin");
  */
 module.exports = merge(
   flowDefaults,
-  // Override default configuration
-  // {
-  //   mode: 'development',
-  //   devtool: 'inline-source-map',
-  // },
-
-  // Add a custom plugin
-  // (install the plugin with `npm install --save-dev webpack-bundle-analyzer`)
-  // {
-  //   plugins: [
-  //     new require('webpack-bundle-analyzer').BundleAnalyzerPlugin({
-  //       analyzerMode: 'static'
-  //     })
-  //   ]
-  // },
   {
     plugins: [
       new GenerateSW({
