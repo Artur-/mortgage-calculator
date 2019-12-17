@@ -15,6 +15,8 @@ import "@polymer/paper-slider";
 import "@vaadin/vaadin-ordered-layout";
 import "@vaadin/vaadin-lumo-styles/all-imports";
 
+import "./slider-field";
+
 import * as RateEndpoint from "./generated/RateEndpoint";
 
 import {
@@ -47,8 +49,8 @@ export class MainView extends LitElement {
 
   @property({ type: Object })
   selectedOptions: Options = {
-    amount: 0,
-    paybackTimeMonths: 0,
+    amount: this.minLoan * 2,
+    paybackTimeMonths: this.minPaybackTime * 12,
     rate: { name: "", rate: 0, margin: 0, defaultRate: false }
   };
 
@@ -73,8 +75,12 @@ export class MainView extends LitElement {
   static get styles() {
     return [
       unsafeCSS(cssFromModule("lumo-typography")),
+      unsafeCSS(cssFromModule("lumo-required-field")),
       unsafeCSS(cssFromModule("lumo-color")),
       css`
+        div[part="label"] {
+          padding-top: 1.5em;
+        }
         vaadin-horizontal-layout {
           align-items: center;
         }
@@ -83,29 +89,24 @@ export class MainView extends LitElement {
   }
   render() {
     return html`
-      <h5>Amount (€)</h5>
-      <vaadin-horizontal-layout>
-        ${formatCurrency(this.minLoan)}
-        <paper-slider
-          @value-changed=${(e: any) => this.amountChanged(e.detail.value)}
-          pin
-          min="${this.minLoan}"
-          max="${this.maxLoan}"
-          step="${this.minLoan}"
-          value="${this.minLoan * 2}"
-        ></paper-slider>
-        ${formatCurrency(this.maxLoan)}
-      </vaadin-horizontal-layout>
-      <h5>Payback time (years)</h5>
-      <vaadin-horizontal-layout>
-        ${this.minPaybackTime}
-        <paper-slider
-          @value-changed=${(e: any) => this.paybackTimeChanged(e.detail.value)}
-          min="${this.minPaybackTime}"
-          max="${this.maxPaybackTime}"
-        ></paper-slider>
-        ${this.maxPaybackTime}
-      </vaadin-horizontal-layout>
+      <div part="label">Amount (€)</div>
+      <slider-field
+        @value-changed=${(e: any) => this.amountChanged(e.detail.value)}
+        min=${this.minLoan}
+        max=${this.maxLoan}
+        value=${this.minLoan * 2}
+        step=${this.minLoan}
+        .formatter="${(value: number) => formatCurrency(value, 0)}"
+      >
+      </slider-field>
+      <div part="label">Payback time (years)</div>
+      <slider-field
+        @value-changed=${(e: any) => this.paybackTimeChanged(e.detail.value)}
+        value="${this.minPaybackTime}"
+        min="${this.minPaybackTime}"
+        max="${this.maxPaybackTime}"
+        .formatter="${(value: number) => value}"
+      ></slider-field>
       <vaadin-radio-group
         label="Rate"
         @value-changed=${(e: any) => this.rateSelected(e.detail.value)}
@@ -122,8 +123,8 @@ export class MainView extends LitElement {
         )}
       </vaadin-radio-group>
 
-      <h5>Monthly payment</h5>
-      <p>${formatCurrency(this.monthlyPayment)} / month</p>
+      <div part="label">Monthly payment</div>
+      <p>${formatCurrency(this.monthlyPayment, 2)} / month</p>
       <vaadin-button @click="${() => this.apply()}">Apply!</vaadin-button>
     `;
   }

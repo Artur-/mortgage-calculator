@@ -1,19 +1,21 @@
 import "@vaadin/vaadin-notification";
 
-const formatter = new Intl.NumberFormat("en", {
-  style: "currency",
-  currency: "EUR"
-});
 const pctFormatter = new Intl.NumberFormat("en", {
   style: "percent",
   minimumFractionDigits: 2
 });
 
-const formatCurrency = (amount: number) => {
+const formatCurrency = (amount: number, decimals: number) => {
+  const formatter = new Intl.NumberFormat("fi", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
   return formatter.format(amount);
 };
 const formatPct = (amount: number) => {
-  return pctFormatter.format(amount/100);
+  return pctFormatter.format(amount / 100);
 };
 const showNotification = (text: string) => {
   const n = _showNotification(text);
