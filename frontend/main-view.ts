@@ -1,4 +1,11 @@
-import { css, customElement, html, LitElement, property } from "lit-element";
+import {
+  css,
+  customElement,
+  html,
+  LitElement,
+  property,
+  unsafeCSS
+} from "lit-element";
 import { repeat } from "lit-html/directives/repeat";
 
 import "@vaadin/vaadin-radio-button";
@@ -6,6 +13,7 @@ import "@vaadin/vaadin-radio-button/vaadin-radio-group";
 import "@vaadin/vaadin-button";
 import "@polymer/paper-slider";
 import "@vaadin/vaadin-ordered-layout";
+import "@vaadin/vaadin-lumo-styles/all-imports";
 
 import * as RateEndpoint from "./generated/RateEndpoint";
 
@@ -17,6 +25,7 @@ import {
 } from "./util";
 import Rate from "./generated/com/example/app/endpoint/Rate";
 import Options from "./generated/com/example/app/endpoint/Options";
+import { cssFromModule } from "@polymer/polymer/lib/utils/style-gather";
 
 @customElement("main-view")
 export class MainView extends LitElement {
@@ -62,11 +71,15 @@ export class MainView extends LitElement {
     return (this.selectedOptions.amount * a) / b;
   }
   static get styles() {
-    return css`
-      vaadin-horizontal-layout {
-        align-items: center;
-      }
-    `;
+    return [
+      unsafeCSS(cssFromModule("lumo-typography")),
+      unsafeCSS(cssFromModule("lumo-color")),
+      css`
+        vaadin-horizontal-layout {
+          align-items: center;
+        }
+      `
+    ];
   }
   render() {
     return html`
