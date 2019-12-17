@@ -6,7 +6,7 @@
     "@polymer/polymer": "3.2.0",
     "@vaadin/flow-deps": "./target/frontend",
     "@vaadin/flow-frontend": "./target/flow-frontend",
-    "@vaadin/router": "^1.4.3",
+    "@vaadin/router": "^1.4.1",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "lit-element": "^2.2.1"
   },
@@ -25,5 +25,5 @@
     "webpack-merge": "4.2.1",
     "workbox-webpack-plugin": "^4.3.1"
   },
-  "vaadinAppPackageHash": "d0da5c8e739a4b37d695d83fd6b6395e6d429b21397cad8975ff7b0a2fdca29a"
+  "vaadinAppPackageHash": "218668411840a88fd03e0900713dec908b2d4d3b552ad276d654adb6478259bf"
 }
