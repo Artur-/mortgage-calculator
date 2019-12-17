@@ -48,6 +48,10 @@ module.exports = merge(
           {
             urlPattern: "/",
             handler: "CacheFirst"
+          },
+          {
+            urlPattern: "/mortgage-calculator/",
+            handler: "CacheFirst"
           }
         ]
       })
