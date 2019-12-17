@@ -47,11 +47,11 @@ module.exports = merge(
         runtimeCaching: [
           {
             urlPattern: "/",
-            handler: "CacheFirst"
+            handler: "NetworkFirst"
           },
           {
             urlPattern: "/mortgage-calculator/",
-            handler: "CacheFirst"
+            handler: "NetworkFirst"
           }
         ]
       })

@@ -16,6 +16,7 @@ import "@vaadin/vaadin-ordered-layout";
 import "@vaadin/vaadin-lumo-styles/all-imports";
 
 import "./slider-field";
+import { cache } from "./cache";
 
 import * as RateEndpoint from "./generated/RateEndpoint";
 
@@ -53,6 +54,8 @@ export class MainView extends LitElement {
     paybackTimeMonths: this.minPaybackTime * 12,
     rate: { name: "", rate: 0, margin: 0, defaultRate: false }
   };
+  @property({ type: Boolean })
+  online: boolean = true;
 
   get total() {
     return this.monthlyPayment * this.selectedOptions.paybackTimeMonths;
@@ -125,7 +128,14 @@ export class MainView extends LitElement {
 
       <div part="label">Monthly payment</div>
       <p>${formatCurrency(this.monthlyPayment, 2)} / month</p>
-      <vaadin-button @click="${() => this.apply()}">Apply!</vaadin-button>
+      <vaadin-button ?disabled="${!this.online}" @click="${() => this.apply()}"
+        >Apply!</vaadin-button
+      >
+      ${!this.online
+        ? html`
+            <div>You need to be online to apply</div>
+          `
+        : ``}
     `;
   }
   amountChanged(value: number) {
@@ -143,7 +153,16 @@ export class MainView extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
-    this.rates = await RateEndpoint.getRates();
+    this.online = navigator.onLine;
+    window.addEventListener("online", () => (this.online = true));
+    window.addEventListener("offline", () => (this.online = false));
+
+    if (this.online) {
+      this.rates = await RateEndpoint.getRates();
+      cache.put("rates", this.rates);
+    } else {
+      this.rates = cache.get("rates");
+    }
   }
 
   async apply() {
