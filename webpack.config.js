@@ -34,6 +34,8 @@ module.exports = merge(
       new GenerateSW({
         swDest: "build/sw.js",
         importsDirectory: "build",
+        globDirectory: "src/main/webapp",
+        globPatterns: ["**"],
         exclude: [
           /\.map$/,
           /^manifest.*\.js$/,
@@ -41,6 +43,12 @@ module.exports = merge(
           /\.md$/,
           /\.json$/,
           /^index.html$/
+        ],
+        runtimeCaching: [
+          {
+            urlPattern: "/",
+            handler: "CacheFirst"
+          }
         ]
       })
     ]
