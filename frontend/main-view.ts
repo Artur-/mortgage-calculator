@@ -83,7 +83,7 @@ export class MainView extends LitElement {
   }
   render() {
     return html`
-      <div>Amount (€)</div>
+      <h5>Amount (€)</h5>
       <vaadin-horizontal-layout>
         ${formatCurrency(this.minLoan)}
         <paper-slider
@@ -96,7 +96,7 @@ export class MainView extends LitElement {
         ></paper-slider>
         ${formatCurrency(this.maxLoan)}
       </vaadin-horizontal-layout>
-      <div>Payback time (years)</div>
+      <h5>Payback time (years)</h5>
       <vaadin-horizontal-layout>
         ${this.minPaybackTime}
         <paper-slider
@@ -122,7 +122,7 @@ export class MainView extends LitElement {
         )}
       </vaadin-radio-group>
 
-      <div>Monthly payment</div>
+      <h5>Monthly payment</h5>
       <p>${formatCurrency(this.monthlyPayment)} / month</p>
       <vaadin-button @click="${() => this.apply()}">Apply!</vaadin-button>
     `;
