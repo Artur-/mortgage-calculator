@@ -1,0 +1,6 @@
+tasks:
+  - init: npm install && mvn install -DskipTests=false
+    command: mvn spring-boot:run
+ports:
+  - port: 8080
+    onOpen: open-preview

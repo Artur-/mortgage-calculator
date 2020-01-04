@@ -1,4 +1,4 @@
-# A simple mortgage calculator based on Vaadin 15
+# A simple mortgage calculator based on Vaadin 15 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Artur-/mortgage-calculator) 
 
 Provides a single client side view for calculating mortgage rates and a
 button to apply for the mortgage.
