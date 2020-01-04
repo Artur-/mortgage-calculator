@@ -1,5 +1,5 @@
 tasks:
-  - init: npm install && mvn install -DskipTests=false
+  - init: mvn install -DskipTests=false -Pproduction
     command: mvn spring-boot:run
 ports:
   - port: 8080
