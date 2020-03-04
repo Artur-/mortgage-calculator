@@ -1,11 +1,11 @@
 package com.example.app.endpoint;
 
-import com.vaadin.flow.server.connect.VaadinService;
+import com.vaadin.flow.server.connect.Endpoint;
 import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
 
 import org.slf4j.LoggerFactory;
 
-@VaadinService
+@Endpoint
 @AnonymousAllowed
 public class RateEndpoint {
 
