@@ -8,34 +8,57 @@
 const merge = require("webpack-merge");
 const flowDefaults = require("./webpack.generated.js");
 const { GenerateSW } = require("workbox-webpack-plugin");
+const glob = require("glob");
+const crypto = require("crypto");
+const path = require("path");
+
 /**
  * To change the webpack config, add a new configuration object in
  * the merge arguments below:
  */
-module.exports = merge(
-  flowDefaults,
-  {
-    plugins: [
-      new GenerateSW({
-        swDest: "build/sw.js",
-        importsDirectory: "build",
-        globDirectory: "src/main/webapp",
-        globPatterns: ["**"],
-        exclude: [
-          /\.map$/,
-          /^manifest.*\.js$/,
-          /\.js\.gz$/,
-          /\.md$/,
-          /\.json$/,
-          /^index.html$/
-        ],
-        runtimeCaching: [
-          {
-            urlPattern: "/",
-            handler: "NetworkFirst"
-          }
-        ]
-      })
-    ]
-  }
-);
+
+const hash = file => {
+  return crypto
+    .createHash("md5")
+    .update(Buffer.from(file))
+    .digest("hex");
+};
+
+const manifestTransform = (manifestEntries, compilation) => {
+  // If anything needs to be propagated to webpack's list
+  // of compilaiton warnings, add the message here:
+  const warnings = [];
+  const manifest = manifestEntries;
+
+  const globDirectory = "src/main/webapp";
+  const globPattern = "**";
+
+  files = glob.sync(globPattern, {
+    cwd: globDirectory,
+    nodir: true
+  });
+  files.forEach(file => {
+    // Add each file with the contents hash as the revision. Without a revision, the file can never be updated.
+    manifest.push({ url: file, revision: hash(path.resolve(__dirname, file)) });
+  });
+
+  return { manifest, warnings };
+};
+
+module.exports = merge(flowDefaults, {
+  plugins: [
+    new GenerateSW({
+      swDest: "build/sw.js",
+      manifestTransforms: [manifestTransform],
+      maximumFileSizeToCacheInBytes: 100 * 1024 * 1024,
+      inlineWorkboxRuntime: true,
+      exclude: [/^index.html$/],
+      runtimeCaching: [
+        {
+          urlPattern: "/",
+          handler: "NetworkFirst"
+        }
+      ]
+    })
+  ]
+});

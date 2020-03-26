@@ -65,7 +65,7 @@
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0",
     "webpack-merge": "4.2.2",
-    "workbox-webpack-plugin": "^4.3.1"
+    "workbox-webpack-plugin": "^5.1.2"
   },
   "vaadinAppPackageHash": "998e5cbe4b84af7bb9f0fcef26c88ee41ccdf3163456a0699a7d7f36c6072e0a",
   "vaadin": {
@@ -126,6 +126,6 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.9.0"
     },
-    "hash": "7b5c48232412c0fb388c09baaeced3a0daedfdff5c30e4121e2678ada1e33bfe"
+    "hash": "67893d1e1f67cc7197eaae8b3640be99486d61e1c7392c6cf2ed6c3099b09837"
   }
 }
