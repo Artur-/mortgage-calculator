@@ -20,12 +20,11 @@ import { cache } from "./cache";
 
 import * as RateEndpoint from "./generated/RateEndpoint";
 
+import { formatCurrency, formatPct } from "./util";
 import {
-  formatCurrency,
-  formatPct,
   showNotification,
-  showErrorNotification
-} from "./util";
+  showErrorNotification,
+} from "@vaadin/flow-frontend/a-notification";
 import Rate from "./generated/com/example/app/endpoint/Rate";
 import Options from "./generated/com/example/app/endpoint/Options";
 import { cssFromModule } from "@polymer/polymer/lib/utils/style-gather";
