@@ -17,3 +17,4 @@ error-screenshots/
 webpack.generated.js
 frontend/generated
 .vscode
+pnpmfile.js
