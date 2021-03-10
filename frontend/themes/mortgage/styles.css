@@ -1,0 +1,6 @@
+div[part="label"] {
+  padding-top: 1.5em;
+}
+vaadin-horizontal-layout {
+  align-items: center;
+}

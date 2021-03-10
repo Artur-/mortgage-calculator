@@ -17,3 +17,4 @@ error-screenshots/
 webpack.generated.js
 frontend/generated
 .vscode
+frontend/themes/mortgage/mortgage.generated.js

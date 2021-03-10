@@ -1,33 +1,21 @@
+import "@polymer/paper-slider";
 import {
-  css,
-  customElement,
-  html,
-  LitElement,
-  property,
-  unsafeCSS
-} from "lit-element";
-import { repeat } from "lit-html/directives/repeat";
-
+  showErrorNotification,
+  showNotification,
+} from "@vaadin/flow-frontend/a-notification";
+import "@vaadin/vaadin-button";
+import "@vaadin/vaadin-lumo-styles/all-imports";
+import "@vaadin/vaadin-ordered-layout";
 import "@vaadin/vaadin-radio-button";
 import "@vaadin/vaadin-radio-button/vaadin-radio-group";
-import "@vaadin/vaadin-button";
-import "@polymer/paper-slider";
-import "@vaadin/vaadin-ordered-layout";
-import "@vaadin/vaadin-lumo-styles/all-imports";
-
-import "./slider-field";
+import { customElement, html, LitElement, property } from "lit-element";
+import { repeat } from "lit-html/directives/repeat";
 import { cache } from "./cache";
-
-import * as RateEndpoint from "./generated/RateEndpoint";
-
-import { formatCurrency, formatPct } from "./util";
-import {
-  showNotification,
-  showErrorNotification,
-} from "@vaadin/flow-frontend/a-notification";
-import Rate from "./generated/com/example/app/endpoint/Rate";
 import Options from "./generated/com/example/app/endpoint/Options";
-import { cssFromModule } from "@polymer/polymer/lib/utils/style-gather";
+import Rate from "./generated/com/example/app/endpoint/Rate";
+import * as RateEndpoint from "./generated/RateEndpoint";
+import "./slider-field";
+import { formatCurrency, formatPct } from "./util";
 
 @customElement("main-view")
 export class MainView extends LitElement {
@@ -56,6 +44,10 @@ export class MainView extends LitElement {
   @property({ type: Boolean })
   online: boolean = true;
 
+  createRenderRoot() {
+    return this;
+  }
+
   get total() {
     return this.monthlyPayment * this.selectedOptions.paybackTimeMonths;
   }
@@ -73,21 +65,6 @@ export class MainView extends LitElement {
     const a = i * Math.pow(1 + i, time);
     const b = Math.pow(1 + i, time) - 1;
     return (this.selectedOptions.amount * a) / b;
-  }
-  static get styles() {
-    return [
-      unsafeCSS(cssFromModule("lumo-typography")),
-      unsafeCSS(cssFromModule("lumo-required-field")),
-      unsafeCSS(cssFromModule("lumo-color")),
-      css`
-        div[part="label"] {
-          padding-top: 1.5em;
-        }
-        vaadin-horizontal-layout {
-          align-items: center;
-        }
-      `
-    ];
   }
   render() {
     return html`
