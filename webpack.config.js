@@ -5,37 +5,27 @@
  * This file can be used for manual configuration. It will not be modified
  * if the flowDefaults constant exists.
  */
-const merge = require("webpack-merge");
-const flowDefaults = require("./webpack.generated.js");
-const { GenerateSW } = require("workbox-webpack-plugin");
+const merge = require('webpack-merge');
+const flowDefaults = require('./webpack.generated.js');
+
 /**
  * To change the webpack config, add a new configuration object in
  * the merge arguments below:
  */
-module.exports = merge(
-  flowDefaults,
-  {
-    plugins: [
-      new GenerateSW({
-        swDest: "build/sw.js",
-        importsDirectory: "build",
-        globDirectory: "src/main/webapp",
-        globPatterns: ["**"],
-        exclude: [
-          /\.map$/,
-          /^manifest.*\.js$/,
-          /\.js\.gz$/,
-          /\.md$/,
-          /\.json$/,
-          /^index.html$/
-        ],
-        runtimeCaching: [
-          {
-            urlPattern: "/",
-            handler: "NetworkFirst"
-          }
-        ]
-      })
-    ]
-  }
+module.exports = merge(flowDefaults,
+  // Override default configuration
+  // {
+  //   mode: 'development',
+  //   devtool: 'inline-source-map',
+  // },
+
+  // Add a custom plugin
+  // (install the plugin with `npm install --save-dev webpack-bundle-analyzer`)
+  // {
+  //   plugins: [
+  //     new require('webpack-bundle-analyzer').BundleAnalyzerPlugin({
+  //       analyzerMode: 'static'
+  //     })
+  //   ]
+  // },
 );
