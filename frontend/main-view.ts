@@ -8,8 +8,9 @@ import "@vaadin/vaadin-lumo-styles/all-imports";
 import "@vaadin/vaadin-ordered-layout";
 import "@vaadin/vaadin-radio-button";
 import "@vaadin/vaadin-radio-button/vaadin-radio-group";
-import { customElement, html, LitElement, property } from "lit-element";
-import { repeat } from "lit-html/directives/repeat";
+import { html, LitElement } from "lit";
+import { customElement, property } from "lit/decorators";
+import { repeat } from "lit/directives/repeat";
 import { cache } from "./cache";
 import Options from "./generated/com/example/app/endpoint/Options";
 import Rate from "./generated/com/example/app/endpoint/Rate";
@@ -39,7 +40,7 @@ export class MainView extends LitElement {
   selectedOptions: Options = {
     amount: this.minLoan * 2,
     paybackTimeMonths: this.minPaybackTime * 12,
-    rate: { name: "", rate: 0, margin: 0, defaultRate: false }
+    rate: { name: "", rate: 0, margin: 0, defaultRate: false },
   };
   @property({ type: Boolean })
   online: boolean = true;
@@ -92,8 +93,8 @@ export class MainView extends LitElement {
       >
         ${repeat(
           this.rates,
-          rate => rate.name,
-          rate => html`
+          (rate) => rate.name,
+          (rate) => html`
             <vaadin-radio-button .value=${rate} ?checked=${rate.defaultRate}
               >${rate.name}
               (${formatPct(rate.rate + rate.margin)})</vaadin-radio-button
@@ -107,11 +108,7 @@ export class MainView extends LitElement {
       <vaadin-button ?disabled="${!this.online}" @click="${() => this.apply()}"
         >Apply!</vaadin-button
       >
-      ${!this.online
-        ? html`
-            <div>You need to be online to apply</div>
-          `
-        : ``}
+      ${!this.online ? html` <div>You need to be online to apply</div> ` : ``}
     `;
   }
   amountChanged(value: number) {

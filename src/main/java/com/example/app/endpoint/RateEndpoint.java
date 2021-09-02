@@ -1,7 +1,11 @@
 package com.example.app.endpoint;
 
-import com.vaadin.flow.server.connect.Endpoint;
-import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
+import java.util.Arrays;
+import java.util.List;
+
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import com.vaadin.fusion.Endpoint;
+import com.vaadin.fusion.Nonnull;
 
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +18,12 @@ public class RateEndpoint {
             new Rate("6m Euribor", -0.34, 1.0, false), //
             new Rate("12m Euribor", -0.263, 1.0, false) };
 
-    public Rate[] getRates() {
-        return rates;
+    @Nonnull
+    public List<@Nonnull Rate> getRates() {
+        return Arrays.asList(rates);
     }
 
+    @Nonnull
     public Result apply(String name, Options options) {
         LoggerFactory.getLogger(getClass()).info("{} applied for a loan: {}", name, options);
 

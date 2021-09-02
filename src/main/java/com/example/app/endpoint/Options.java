@@ -1,8 +1,11 @@
 package com.example.app.endpoint;
 
+import com.vaadin.fusion.Nonnull;
+
 public class Options {
     private double amount;
     private int paybackTimeMonths;
+    @Nonnull
     private Rate rate;
 
     public double getAmount() {
@@ -27,6 +30,11 @@ public class Options {
 
     public void setRate(Rate rate) {
         this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return "Options [amount=" + amount + ", paybackTimeMonths=" + paybackTimeMonths + ", rate=" + rate + "]";
     }
 
 }
