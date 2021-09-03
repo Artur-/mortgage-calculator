@@ -5,19 +5,20 @@
  * This file can be used for manual configuration. It will not be modified
  * if the flowDefaults constant exists.
  */
-const merge = require('webpack-merge');
-const flowDefaults = require('./webpack.generated.js');
+const merge = require("webpack-merge");
+const flowDefaults = require("./webpack.generated.js");
 
 /**
  * To change the webpack config, add a new configuration object in
  * the merge arguments below:
  */
-module.exports = merge(flowDefaults,
+module.exports = merge(
+  flowDefaults,
   // Override default configuration
-  // {
-  //   mode: 'development',
-  //   devtool: 'inline-source-map',
-  // },
+  {
+    mode: "development",
+    devtool: "hidden-source-map",
+  }
 
   // Add a custom plugin
   // (install the plugin with `npm install --save-dev webpack-bundle-analyzer`)

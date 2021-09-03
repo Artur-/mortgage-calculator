@@ -9,7 +9,7 @@ import "@vaadin/vaadin-ordered-layout";
 import "@vaadin/vaadin-radio-button";
 import "@vaadin/vaadin-radio-button/vaadin-radio-group";
 import { html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators";
+import { customElement, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat";
 import { cache } from "./cache";
 import Options from "./generated/com/example/app/endpoint/Options";
@@ -20,29 +20,29 @@ import { formatCurrency, formatPct } from "./util";
 
 @customElement("main-view")
 export class MainView extends LitElement {
-  @property({ type: Array })
+  @state()
   rates: Rate[] = [];
-  @property({ type: Number })
+  @state()
   inflationRate: number = 1.9;
 
-  @property({ type: Number })
+  @state()
   minLoan = 100000;
-  @property({ type: Number })
+  @state()
   maxLoan = 2000000;
-  @property({ type: Number })
+  @state()
   minPaybackTime = 10;
-  @property({ type: Number })
+  @state()
   maxPaybackTime = 30;
-  @property({ type: Number })
+  @state()
   trueInterestRate: number = 0;
 
-  @property({ type: Object })
+  @state()
   selectedOptions: Options = {
     amount: this.minLoan * 2,
     paybackTimeMonths: this.minPaybackTime * 12,
     rate: { name: "", rate: 0, margin: 0, defaultRate: false },
   };
-  @property({ type: Boolean })
+  @state()
   online: boolean = true;
 
   createRenderRoot() {
@@ -112,15 +112,21 @@ export class MainView extends LitElement {
     `;
   }
   amountChanged(value: number) {
-    this.selectedOptions.amount = value;
+    this.selectedOptions = { ...this.selectedOptions, amount: value };
     this.requestUpdate("selectedOptions");
   }
   paybackTimeChanged(value: number) {
-    this.selectedOptions.paybackTimeMonths = value * 12;
+    this.selectedOptions = {
+      ...this.selectedOptions,
+      paybackTimeMonths: value * 12,
+    };
     this.requestUpdate("selectedOptions");
   }
   rateSelected(rate: Rate) {
-    this.selectedOptions.rate = rate;
+    this.selectedOptions = {
+      ...this.selectedOptions,
+      rate,
+    };
     this.requestUpdate("selectedOptions");
   }
 
@@ -131,7 +137,7 @@ export class MainView extends LitElement {
     window.addEventListener("offline", () => (this.online = false));
 
     if (this.online) {
-      this.rates = await RateEndpoint.getRates();
+      this.rates = [...(await RateEndpoint.getRates())];
       cache.put("rates", this.rates);
     } else {
       this.rates = cache.get("rates");
