@@ -105,7 +105,7 @@ public final class DevModeHandlerImpl
     // It's not possible to know whether webpack is ready unless reading output
     // messages. When webpack finishes, it writes either a `Compiled` or a
     // `Failed` in the last line
-    private static final String DEFAULT_OUTPUT_PATTERN = ": Compiled.";
+    private static final String DEFAULT_OUTPUT_PATTERN = "dev server running at:";
     private static final String DEFAULT_ERROR_PATTERN = ": Failed to compile.";
     private static final String FAILED_MSG = "\n------------------ Frontend compilation failed. ------------------\n\n";
     private static final String SUCCEED_MSG = "\n----------------- Frontend compiled successfully. -----------------\n\n";
@@ -622,7 +622,7 @@ public final class DevModeHandlerImpl
         Pair<File, File> webPackFiles = validateFiles(npmFolder);
 
         long start = System.nanoTime();
-        getLogger().info("Starting webpack-dev-server");
+        getLogger().info("Starting vite");
 
         watchDog.set(new DevServerWatchDog());
 
@@ -660,8 +660,9 @@ public final class DevModeHandlerImpl
             nodeExec = tools.getNodeExecutable();
         }
 
-        List<String> command = makeCommands(config, webPackFiles.getFirst(),
-                webPackFiles.getSecond(), nodeExec);
+        List<String> command = viewCommand( nodeExec);
+        // List<String> command = makeCommands(config, webPackFiles.getFirst(),
+        //         webPackFiles.getSecond(), nodeExec);
 
         console(GREEN, START);
         if (getLogger().isDebugEnabled()) {
@@ -730,6 +731,15 @@ public final class DevModeHandlerImpl
         watchDog.set(null);
     }
 
+    private List<String> viewCommand(String nodeExec) {
+        List<String> command = new ArrayList<>();
+        command.add(nodeExec);
+        command.add("node_modules/.bin/vite");
+        command.add("--port");
+        command.add(String.valueOf(port));
+        return command;
+
+    }
     private List<String> makeCommands(ApplicationConfiguration config,
             File webpack, File webpackConfig, String nodeExec) {
         List<String> command = new ArrayList<>();
