@@ -1,8 +1,6 @@
-import "@vaadin/vaadin-notification";
-
 const pctFormatter = new Intl.NumberFormat("en", {
   style: "percent",
-  minimumFractionDigits: 2
+  minimumFractionDigits: 2,
 });
 
 const formatCurrency = (amount: number, decimals: number) => {

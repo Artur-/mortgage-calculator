@@ -9,8 +9,8 @@ import "@vaadin/vaadin-ordered-layout";
 import "@vaadin/vaadin-radio-button";
 import "@vaadin/vaadin-radio-button/vaadin-radio-group";
 import { html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators";
-import { repeat } from "lit/directives/repeat";
+import { customElement, property } from "lit/decorators.js";
+import { repeat } from "lit/directives/repeat.js";
 import { cache } from "./cache";
 import Options from "./generated/com/example/app/endpoint/Options";
 import Rate from "./generated/com/example/app/endpoint/Rate";
@@ -95,7 +95,9 @@ export class MainView extends LitElement {
           this.rates,
           (rate) => rate.name,
           (rate) => html`
-            <vaadin-radio-button .value=${rate.name} ?checked=${rate.defaultRate}
+            <vaadin-radio-button
+              .value=${rate.name}
+              ?checked=${rate.defaultRate}
               >${rate.name}
               (${formatPct(rate.rate + rate.margin)})</vaadin-radio-button
             >
@@ -120,7 +122,7 @@ export class MainView extends LitElement {
     this.requestUpdate("selectedOptions");
   }
   rateSelected(rateName: string) {
-    this.selectedOptions.rate = this.rates.find(r => r.name === rateName)!;
+    this.selectedOptions.rate = this.rates.find((r) => r.name === rateName)!;
     this.requestUpdate("selectedOptions");
   }
 

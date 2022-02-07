@@ -18,3 +18,4 @@ webpack.generated.js
 frontend/generated
 .vscode
 frontend/themes/mortgage/mortgage.generated.js
+types.d.ts

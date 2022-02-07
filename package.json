@@ -12,7 +12,7 @@
     "@polymer/iron-meta": "3.0.1",
     "@polymer/iron-resizable-behavior": "3.0.1",
     "@polymer/paper-slider": "^3.0.1",
-    "@polymer/polymer": "3.2.0",
+    "@polymer/polymer": "3.4.1",
     "@vaadin/accordion": "23.0.0-beta1",
     "@vaadin/app-layout": "23.0.0-beta1",
     "@vaadin/avatar": "23.0.0-beta1",
@@ -131,27 +131,16 @@
     "@vaadin/build-status-plugin": "./target/plugins/build-status-plugin",
     "@vaadin/theme-live-reload-plugin": "./target/plugins/theme-live-reload-plugin",
     "@vaadin/theme-loader": "./target/plugins/theme-loader",
-    "chokidar": "^3.5.0",
-    "compression-webpack-plugin": "4.0.1",
-    "css-loader": "5.2.7",
-    "esbuild-loader": "2.15.1",
-    "extra-watch-webpack-plugin": "1.0.3",
-    "extract-loader": "5.1.0",
-    "file-loader": "6.2.0",
-    "fork-ts-checker-webpack-plugin": "6.2.1",
     "glob": "7.1.6",
-    "html-webpack-plugin": "4.5.1",
-    "lit-css-loader": "0.1.0",
-    "loader-utils": "2.0.0",
+    "mkdirp": "1.0.4",
+    "rollup-plugin-brotli": "3.1.0",
     "typescript": "4.5.3",
-    "webpack": "4.46.0",
+    "vite": "v2.8.0-beta.5",
+    "vite-plugin-checker": "0.3.4",
     "webpack-babel-multi-target-plugin": "2.3.1",
-    "webpack-cli": "4.9.0",
-    "webpack-dev-server": "4.1.1",
-    "webpack-merge": "4.2.2",
+    "workbox-build": "6.4.2",
     "workbox-core": "6.4.2",
-    "workbox-precaching": "6.4.2",
-    "workbox-webpack-plugin": "6.4.2"
+    "workbox-precaching": "6.4.2"
   },
   "vaadin": {
     "dependencies": {
@@ -164,7 +153,7 @@
       "@polymer/iron-media-query": "3.0.1",
       "@polymer/iron-meta": "3.0.1",
       "@polymer/iron-resizable-behavior": "3.0.1",
-      "@polymer/polymer": "3.2.0",
+      "@polymer/polymer": "3.4.1",
       "@vaadin/accordion": "23.0.0-beta1",
       "@vaadin/app-layout": "23.0.0-beta1",
       "@vaadin/avatar": "23.0.0-beta1",
@@ -273,28 +262,17 @@
       "lit": "2.0.0"
     },
     "devDependencies": {
-      "chokidar": "^3.5.0",
-      "compression-webpack-plugin": "4.0.1",
-      "css-loader": "5.2.7",
-      "esbuild-loader": "2.15.1",
-      "extra-watch-webpack-plugin": "1.0.3",
-      "extract-loader": "5.1.0",
-      "file-loader": "6.2.0",
-      "fork-ts-checker-webpack-plugin": "6.2.1",
       "glob": "7.1.6",
-      "html-webpack-plugin": "4.5.1",
-      "lit-css-loader": "0.1.0",
-      "loader-utils": "2.0.0",
+      "mkdirp": "1.0.4",
+      "rollup-plugin-brotli": "3.1.0",
       "typescript": "4.5.3",
-      "webpack": "4.46.0",
-      "webpack-cli": "4.9.0",
-      "webpack-dev-server": "4.1.1",
-      "webpack-merge": "4.2.2",
+      "vite": "v2.8.0-beta.5",
+      "vite-plugin-checker": "0.3.4",
+      "workbox-build": "6.4.2",
       "workbox-core": "6.4.2",
-      "workbox-precaching": "6.4.2",
-      "workbox-webpack-plugin": "6.4.2"
+      "workbox-precaching": "6.4.2"
     },
-    "hash": "f1a8fa938b09f6dd2004bb6c4e937c58a0cdb03496a5d0e89a4e2e4ba86f07ab"
+    "hash": "d0bc099a510cd611975b484d71fd9ce7644246a30425a74a2dcd6d0aa683c5b8"
   },
   "overrides": {
     "@vaadin/accordion": "$@vaadin/accordion",
@@ -417,6 +395,7 @@
     "moment": "$moment",
     "@vaadin/common-frontend": "$@vaadin/common-frontend",
     "@hilla/form": "$@hilla/form",
-    "@hilla/frontend": "$@hilla/frontend"
+    "@hilla/frontend": "$@hilla/frontend",
+    "vite": "$vite"
   }
 }
