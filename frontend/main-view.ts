@@ -95,7 +95,7 @@ export class MainView extends LitElement {
           this.rates,
           (rate) => rate.name,
           (rate) => html`
-            <vaadin-radio-button .value=${rate} ?checked=${rate.defaultRate}
+            <vaadin-radio-button .value=${rate.name} ?checked=${rate.defaultRate}
               >${rate.name}
               (${formatPct(rate.rate + rate.margin)})</vaadin-radio-button
             >
@@ -119,8 +119,8 @@ export class MainView extends LitElement {
     this.selectedOptions.paybackTimeMonths = value * 12;
     this.requestUpdate("selectedOptions");
   }
-  rateSelected(rate: Rate) {
-    this.selectedOptions.rate = rate;
+  rateSelected(rateName: string) {
+    this.selectedOptions.rate = this.rates.find(r => r.name === rateName)!;
     this.requestUpdate("selectedOptions");
   }
 

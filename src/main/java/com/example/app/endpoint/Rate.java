@@ -1,6 +1,9 @@
 package com.example.app.endpoint;
 
+import dev.hilla.Nonnull;
+
 public class Rate {
+    @Nonnull
     private String name;
     private double rate, margin;
     private boolean defaultRate;

@@ -1,6 +1,6 @@
 package com.example.app.endpoint;
 
-import com.vaadin.fusion.Nonnull;
+import dev.hilla.Nonnull;
 
 public class Options {
     private double amount;
